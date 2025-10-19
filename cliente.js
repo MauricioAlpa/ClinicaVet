@@ -2,12 +2,12 @@ class Cliente {
     #nome
     #raça
     #especie
-    #n_consultas
-    constructor(nome,espécie, raça, n_consultas) {
+    #p_saude
+    constructor(nome,especie, raça, p_saude) {
         this.#nome = nome
         this.#raça = raça
-        this.#especie = espécie
-        this.#n_consultas = n_consultas
+        this.#especie = especie
+        this.#p_saude = p_saude
     }
     getNome() {
         return this.#nome
@@ -18,14 +18,14 @@ class Cliente {
     getEspecie() {
         return this.#especie
     }
-    getN_consultas() {
-        return this.#n_consultas
+    getP_saude() {
+        return this.#p_saude
     }
-    setN_consultas(n_consultas) {
-        this.#n_consultas = n_consultas
+    setN_consultas(p_saude) {
+        this.#p_saude = p_saude
     }
-    setEspecie(espécie) {
-        this.#especie = espécie
+    setEspecie(especie) {
+        this.#especie = especie
     } 
     setRaça(raça) {
         this.#raça = raça
@@ -33,13 +33,28 @@ class Cliente {
     setNome(nome) {
         this.#nome = nome
     }
-    agendarConsulta() {
-        if (this.getN_consultas() == 0) {
-            console.log("Essa é a primeira consulta do cliente " + this.#nome)
-        }
-        else {
-            console.log(`O cliente  ${this.getNome()}, da raça ${this.getRaça()} já teve ${this.getN_consultas()} consultas.`)
-        }
 
+    setP_saude(p_saude) {
+        this.#p_saude = p_saude
     }
+}
+
+class Adm {
+    listadeclientes = []
+    lsitademedicos = []
+    registrarCliente(nome, especie, raça) {
+        let p_saude = false 
+        for (const ClienteExisteente of this.listadeclientes) {
+            if (ClienteExisteente.getNome() === nome && ClienteExisteente.getEspecie() === especie && ClienteExisteente.getRaça() === raça) {
+                p_saude = true
+                break
+            }
+        }
+        const novoCliente = new Cliente(nome, especie, raça, p_saude)
+
+    this.listadeclientes.push(novoCliente)
+
+    console.log(`Cliente '${nome}' registrado com sucesso. Planod de saúde: ${p_saude}.`)
+    }
+
 }
