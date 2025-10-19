@@ -1,4 +1,7 @@
+const read = require('readline-sync');
+
 class Cliente {
+
     #nome
     #raça
     #especie
@@ -9,52 +12,62 @@ class Cliente {
         this.#especie = especie
         this.#p_saude = p_saude
     }
-    getNome() {
-        return this.#nome
-    }
-    getRaça() {
-        return this.#raça
-    }  
-    getEspecie() {
-        return this.#especie
-    }
-    getP_saude() {
-        return this.#p_saude
-    }
-    setN_consultas(p_saude) {
-        this.#p_saude = p_saude
-    }
-    setEspecie(especie) {
-        this.#especie = especie
-    } 
-    setRaça(raça) {
-        this.#raça = raça
-    }
-    setNome(nome) {
-        this.#nome = nome
-    }
 
-    setP_saude(p_saude) {
-        this.#p_saude = p_saude
-    }
+    getNome() { return this.#nome }
+    getEspecie() { return this.#especie }
+    getRaça() { return this.#raça }
+    getP_saude() { return this.#p_saude }
+    setP_saude(p_saude) { this.#p_saude = p_saude }
 }
+
 
 class Adm {
+
     listadeclientes = []
-    lsitademedicos = []
-    registrarCliente(nome, especie, raça) {
-        let p_saude = false 
-        for (const ClienteExisteente of this.listadeclientes) {
-            if (ClienteExisteente.getNome() === nome && ClienteExisteente.getEspecie() === especie && ClienteExisteente.getRaça() === raça) {
-                p_saude = true
-                break
+    listademedicos = []
+
+    registrarCliente() {
+
+
+        console.log("\n--- Registro de Novo Cliente ---");
+        const nome = read.question("Qual o nome do cliente? ");
+        const especie = read.question("Qual a especie do cliente? ");
+        const raça = read.question("Qual a raca do cliente? ");
+
+
+        for (const clienteExistente of this.listadeclientes) {
+            if (clienteExistente.getNome() === nome && clienteExistente.getEspecie() === especie && clienteExistente.getRaça() === raça) {
+                
+                clienteExistente.setP_saude(true);  
+                console.log(`Cliente '${nome}' já existe.`);
+                return; 
             }
         }
-        const novoCliente = new Cliente(nome, especie, raça, p_saude)
+        
+        let p_saude = false;
 
-    this.listadeclientes.push(novoCliente)
-
-    console.log(`Cliente '${nome}' registrado com sucesso. Planod de saúde: ${p_saude}.`)
+        const novoCliente = new Cliente(nome, especie, raça, p_saude);
+        this.listadeclientes.push(novoCliente);
+        console.log(`Cliente '${nome}' registrado com sucesso. Plano de saúde: ${p_saude}.`);
     }
 
+    listarClientes() {
+        console.log("\n--- Lista de Clientes ---");
+        if (this.listadeclientes.length === 0) {
+            console.log("Nenhum cliente registrado.");
+            return;
+        }
+        this.listadeclientes.forEach((cliente, index) => {
+            console.log(`${index + 1}. Nome: ${cliente.getNome()}, Plano: ${cliente.getP_saude()}`);
+        });
+    }
 }
+
+console.log("Sistema da Clínica Iniciado!");
+
+const minhaClinica = new Adm();
+minhaClinica.registrarCliente();
+minhaClinica.registrarCliente();
+minhaClinica.listarClientes();
+minhaClinica.registrarCliente();
+minhaClinica.listarClientes();
