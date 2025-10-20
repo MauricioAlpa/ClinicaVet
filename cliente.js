@@ -19,7 +19,6 @@ class Cliente {
     getP_saude() { return this.#p_saude }
 }
 
-
 class Adm {
 
     listadeclientes = []
@@ -27,11 +26,7 @@ class Adm {
     lista_p_completo = []
     lista_p_basico = []
   
-
-
-
     registrarCliente() {
-
 
         console.log("\n--- Registro de Novo Cliente ---");
         const nome = read.question("Qual o nome do cliente? ");
