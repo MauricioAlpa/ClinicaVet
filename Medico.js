@@ -41,6 +41,12 @@ class Medico {
 
     diagnosticar() {
         let diagnostico = read.question("Qual o diagnostico?\n")
-        console.log(`O doutor(a):${this.GetNome()} diagnosticou o animal ${getNome()} com ${}`)
+        return console.log(`O doutor(a):${this.GetNome()} diagnosticou o animal ${getNome} com ${diagnostico}`);
+    }
+
+    realizarConsulta() {
+        let nome_animal = read.question("Qual o nome do animal?")
+
     }
 }
+

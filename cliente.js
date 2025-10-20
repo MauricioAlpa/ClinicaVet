@@ -1,3 +1,7 @@
+export default Cliente
+
+const read = require('readline-sync')
+
 class Cliente {
     #nome
     #raça
@@ -36,6 +40,43 @@ class Cliente {
 
     setP_saude(p_saude) {
         this.#p_saude = p_saude
+    }
+
+    realizarAgendamento() {
+        let dataValida = false;
+        let dataConsulta;
+
+        while(!dataValida){
+
+            //pede a data em formato brasileiro
+            let data = read.question("Informe a data e hora da consulta (dd/mm/yyyy hh:mm): ");
+
+            //separa a data por date e horas
+            let [parteData, parteHora] = data.split(" ")
+
+            //verifica se existem as partes para data e para hora
+            if(!parteData || !parteHora) {
+                console.log("Formato inválido! Tente novamente.");
+                continue;
+            }
+
+            //sepera as partes da data e horas e passa de String para numero
+            let [dia, mes, ano] = parteData.split("/").map(Number);
+            let [horas, minutos] = parteHora.split(":").map(Number);
+
+            dataConsulta = new Date(ano, mes - 1, dia, horas, minutos);
+
+            //verifica se a data e valida
+            if(isNaN(dataConsulta)) {
+                console.log("Data inválida! Tente novamente");
+                continue;
+            }
+
+            if(dataConsulta.getDay() == 0 || dataConsulta.getDay() == 6 || horas >= 8 || horas <= 18) {
+                console.log("A clínica funciona apenas de segunda a sexta, das 8:00 da manhã ás 18:00 da tarde.")
+                continue;
+            } 
+        }
     }
 }
 
