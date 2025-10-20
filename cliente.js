@@ -12,6 +12,7 @@ class Cliente {
         this.#especie = especie
         this.#p_saude = p_saude
     }
+    
     listadeconsultas = []
 
     getNome() { return this.#nome }
