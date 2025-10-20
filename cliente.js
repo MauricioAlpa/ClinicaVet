@@ -17,7 +17,6 @@ class Cliente {
     getEspecie() { return this.#especie }
     getRaça() { return this.#raça }
     getP_saude() { return this.#p_saude }
-    setP_saude(p_saude) { this.#p_saude = p_saude }
 }
 
 
@@ -25,6 +24,11 @@ class Adm {
 
     listadeclientes = []
     listademedicos = []
+    lista_p_completo = []
+    lista_p_basico = []
+  
+
+
 
     registrarCliente() {
 
@@ -33,21 +37,27 @@ class Adm {
         const nome = read.question("Qual o nome do cliente? ");
         const especie = read.question("Qual a especie do cliente? ");
         const raça = read.question("Qual a raca do cliente? ");
+        const p_saude = read.question("Qual plano de saúde o cliente possui? (básico/completo) ").toLowerCase();
 
 
         for (const clienteExistente of this.listadeclientes) {
             if (clienteExistente.getNome() === nome && clienteExistente.getEspecie() === especie && clienteExistente.getRaça() === raça) {
-                
-                clienteExistente.setP_saude(true);  
+                  
                 console.log(`Cliente '${nome}' já existe.`);
                 return; 
             }
         }
         
-        let p_saude = false;
 
         const novoCliente = new Cliente(nome, especie, raça, p_saude);
         this.listadeclientes.push(novoCliente);
+        
+        if (p_saude === 'completo') {
+            this.lista_p_completo.push(novoCliente);
+        } else if (p_saude === 'basico') {
+            this.lista_p_basico.push(novoCliente);
+        }
+
         console.log(`Cliente '${nome}' registrado com sucesso. Plano de saúde: ${p_saude}.`);
     }
 
@@ -62,6 +72,7 @@ class Adm {
         });
     }
 }
+
 
 console.log("Sistema da Clínica Iniciado!");
 
