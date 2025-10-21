@@ -1,10 +1,8 @@
-export default Cliente
 import Agendamento from './Agendamento.js'
 import Medico from './Medico.js'
+import Adm from './Adm.js'
 
-const read = require('readline-sync')
-
-class Cliente {
+export default class Cliente {
     #nome
     #raça
     #especie
@@ -87,20 +85,20 @@ class Cliente {
             
             let agendamento = new Agendamento(this.getNome(), dataConsulta);
 
-
+            let listaM = getListaDeMedicos();
             //consulta se o medico escolhido tem horario disponivel
-            for(let i = 0; i < listaDeMedicos.length; i++){
-                if(listaDeMedicos[i].getNomeMedico() == medicoPrefer) {
-                    for(let k = 0; k < listaDeMedicos[i].getAgendamentos().length; k++) {
+            for(let i = 0; i < listaM.length; i++){
+                if(listaM[i].getNomeMedico() == medicoPrefer) {
+                    for(let k = 0; k < listaM[i].getAgendamentos().length; k++) {
 
-                        let ag = listaDeMedicos[i].getAgendamentos()[k];
+                        let ag = listaM[i].getAgendamentos()[k];
                         if(ag.getData().getTime() === dataConsulta.getTime()){
                             console.log("Horário ocupado, ecolha outro por gentileza");
                             return;
                         }
                     }
 
-                    listaDeMedicos[i].setAgendamentos(agendamento);
+                    listaM[i].setAgendamentos(agendamento);
                     console.log(`Consulta agendada com o Dr(a). ${medicoPrefer} para ${dataConsulta}`);
                     return;
                 }
@@ -108,24 +106,4 @@ class Cliente {
 
         }
     }
-}
-
-class Adm {
-    listadeclientes = []
-    listaDeMedicos = []
-    registrarCliente(nome, especie, raça) {
-        let p_saude = false 
-        for (const ClienteExisteente of this.listadeclientes) {
-            if (ClienteExisteente.getNome() === nome && ClienteExisteente.getEspecie() === especie && ClienteExisteente.getRaça() === raça) {
-                p_saude = true
-                break
-            }
-        }
-        const novoCliente = new Cliente(nome, especie, raça, p_saude)
-
-    this.listadeclientes.push(novoCliente)
-
-    console.log(`Cliente '${nome}' registrado com sucesso. Planod de saúde: ${p_saude}.`)
-    }
-
 }

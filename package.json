@@ -1,4 +1,8 @@
 {
+  "type": "module",
+  "name": "clinica_vet",
+  "version": "1.0.0",
+  "main": "main.js",
   "dependencies": {
     "readline-sync": "^1.4.10"
   }
