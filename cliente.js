@@ -1,4 +1,6 @@
 export default Cliente
+import Agendamento from './Agendamento.js'
+import Medico from './Medico.js'
 
 const read = require('readline-sync')
 
@@ -45,11 +47,14 @@ class Cliente {
     realizarAgendamento() {
         let dataValida = false;
         let dataConsulta;
+        let medicoPrefer;
 
         while(!dataValida){
 
             //pede a data em formato brasileiro
             let data = read.question("Informe a data e hora da consulta (dd/mm/yyyy hh:mm): ");
+            medicoPrefer = read.question("Qual o médico de preferência?");
+            
 
             //separa a data por date e horas
             let [parteData, parteHora] = data.split(" ")
@@ -72,17 +77,42 @@ class Cliente {
                 continue;
             }
 
-            if(dataConsulta.getDay() == 0 || dataConsulta.getDay() == 6 || horas >= 8 || horas <= 18) {
+            //so faz o agendamento nos horarios em que a clinica esta aberta
+            if(dataConsulta.getDay() == 0 || dataConsulta.getDay() == 6 || horas < 8 || horas >= 18) {
                 console.log("A clínica funciona apenas de segunda a sexta, das 8:00 da manhã ás 18:00 da tarde.")
                 continue;
-            } 
+            }
+
+            
+            
+            let agendamento = new Agendamento(this.getNome(), dataConsulta);
+
+
+            //consulta se o medico escolhido tem horario disponivel
+            for(let i = 0; i < listaDeMedicos.length; i++){
+                if(listaDeMedicos[i].getNomeMedico() == medicoPrefer) {
+                    for(let k = 0; k < listaDeMedicos[i].getAgendamentos().length; k++) {
+
+                        let ag = listaDeMedicos[i].getAgendamentos()[k];
+                        if(ag.getData().getTime() === dataConsulta.getTime()){
+                            console.log("Horário ocupado, ecolha outro por gentileza");
+                            return;
+                        }
+                    }
+
+                    listaDeMedicos[i].setAgendamentos(agendamento);
+                    console.log(`Consulta agendada com o Dr(a). ${medicoPrefer} para ${dataConsulta}`);
+                    return;
+                }
+            }
+
         }
     }
 }
 
 class Adm {
     listadeclientes = []
-    lsitademedicos = []
+    listaDeMedicos = []
     registrarCliente(nome, especie, raça) {
         let p_saude = false 
         for (const ClienteExisteente of this.listadeclientes) {
