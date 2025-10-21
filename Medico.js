@@ -1,21 +1,18 @@
-export default Medico
 import Consulta from "./Consulta.js"
 import Cliente from "./cliente.js"
+import read from "readline-sync";
 
-const read = require('readline-sync')
 
-class Medico {
+export default class Medico {
     #nome_medico
-    #agendamentos
-    #historico_clientes
+    #agendamentos = []
+    #historico_clientes = []
 
     constructor(nome) {
         this.#nome_medico = nome;
-        this.#agendamentos = [];
-        this.#historico_clientes = [];
     }
 
-    GetNomeMedico() {
+    getNomeMedico() {
         return this.#nome_medico;
     }
 
@@ -28,7 +25,7 @@ class Medico {
     }
 
     setAgendamentos(agendamentos) {
-        this.#agendamentos.pop(agendamentos)
+        this.#agendamentos.push(agendamentos)
     }
 
     GetHistoricoClientes() {
@@ -36,7 +33,7 @@ class Medico {
     }
 
     setHistoricoClientes(clientes) {
-        this.#historico_clientes.pop(clientes);
+        this.#historico_clientes.push(clientes);
     }
 
     diagnosticar() {
