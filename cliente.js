@@ -1,8 +1,8 @@
 export default Cliente
 import Agendamento from './Agendamento.js'
 import Medico from './Medico.js'
-
-const read = require('readline-sync')
+import Adm from './adm.js'
+import read from 'readline-sync'
 
 class Cliente {
     #nome
@@ -95,7 +95,7 @@ class Cliente {
 
                         let ag = listaDeMedicos[i].getAgendamentos()[k];
                         if(ag.getData().getTime() === dataConsulta.getTime()){
-                            console.log("Horário ocupado, ecolha outro por gentileza");
+                            console.log("Horário ocupado, escolha outro por gentileza");
                             return;
                         }
                     }
@@ -110,22 +110,3 @@ class Cliente {
     }
 }
 
-class Adm {
-    listadeclientes = []
-    listaDeMedicos = []
-    registrarCliente(nome, especie, raça) {
-        let p_saude = false 
-        for (const ClienteExisteente of this.listadeclientes) {
-            if (ClienteExisteente.getNome() === nome && ClienteExisteente.getEspecie() === especie && ClienteExisteente.getRaça() === raça) {
-                p_saude = true
-                break
-            }
-        }
-        const novoCliente = new Cliente(nome, especie, raça, p_saude)
-
-    this.listadeclientes.push(novoCliente)
-
-    console.log(`Cliente '${nome}' registrado com sucesso. Planod de saúde: ${p_saude}.`)
-    }
-
-}
