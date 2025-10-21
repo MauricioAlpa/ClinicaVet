@@ -5,22 +5,22 @@ import Cliente from "./cliente.js"
 const read = require('readline-sync')
 
 class Medico {
-    #nome
+    #nome_medico
     #agendamentos
     #historico_clientes
 
     constructor(nome) {
-        this.#nome = nome;
+        this.#nome_medico = nome;
         this.#agendamentos = [];
         this.#historico_clientes = [];
     }
 
-    GetNome() {
-        return this.#nome;
+    GetNomeMedico() {
+        return this.#nome_medico;
     }
 
-    setNome(nome) {
-        this.#nome = nome;
+    setNomeMedico(nome) {
+        this.#nome_medico = nome;
     }
 
     GetAgendamentos() {
@@ -41,12 +41,7 @@ class Medico {
 
     diagnosticar() {
         let diagnostico = read.question("Qual o diagnostico?\n")
-        return console.log(`O doutor(a):${this.GetNome()} diagnosticou o animal ${getNome} com ${diagnostico}`);
-    }
-
-    realizarConsulta() {
-        let nome_animal = read.question("Qual o nome do animal?")
-
+        return console.log(`O doutor(a):${this.GetNome()} diagnosticou o animal ${getNome()} com ${diagnostico}`);
     }
 }
 
