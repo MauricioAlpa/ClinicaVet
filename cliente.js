@@ -65,7 +65,7 @@ export default class Cliente {
 
             //pede a data em formato brasileiro
             let data = read.question("Informe a data e hora da consulta (dd/mm/yyyy hh:mm): ");
-            medicoPrefer = read.question("Qual o médico de preferência?");
+            medicoPrefer = read.question("Qual o médico de preferência?").toLowerCase();
             
 
             //separa a data por date e horas
@@ -112,6 +112,7 @@ export default class Cliente {
 
                     listaM[i].setAgendamentos(agendamento);
                     console.log(`Consulta agendada com o Dr(a). ${medicoPrefer} para ${dataConsulta}`);
+                    dataValida = true;
                     return;
                 }
             }
@@ -120,7 +121,7 @@ export default class Cliente {
     }
 
     comprar() {
-        let n = Number(read.question("Quantidade de itens"));
+        let n = Number(read.question("Quantidade de itens:"));
         console.log(`Compra de ${n} itens realizada com sucesso!`)
     }
 }
