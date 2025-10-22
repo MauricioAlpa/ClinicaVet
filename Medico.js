@@ -20,7 +20,7 @@ export default class Medico {
         this.#nome_medico = nome;
     }
 
-    GetAgendamentos() {
+    getAgendamentos() {
         return this.#agendamentos
     }
 
