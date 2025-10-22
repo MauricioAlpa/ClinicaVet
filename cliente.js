@@ -1,18 +1,26 @@
 import Agendamento from './Agendamento.js'
 import Medico from './Medico.js'
 import Adm from './Adm.js'
+import read from "readline-sync";
 
 export default class Cliente {
+    #cpf
     #nome
     #raça
     #especie
     #p_saude
-    constructor(nome,especie, raça, p_saude) {
+    constructor(cpf,nome,especie, raça, p_saude) {
+        this.#cpf = cpf
         this.#nome = nome
         this.#raça = raça
         this.#especie = especie
         this.#p_saude = p_saude
     }
+
+    getCpf() {
+        return this.#cpf;
+    }
+
     getNome() {
         return this.#nome
     }
@@ -25,6 +33,11 @@ export default class Cliente {
     getP_saude() {
         return this.#p_saude
     }
+
+    setCpf(cpf){
+        this.#cpf = cpf;
+    }
+
     setN_consultas(p_saude) {
         this.#p_saude = p_saude
     }
@@ -42,10 +55,11 @@ export default class Cliente {
         this.#p_saude = p_saude
     }
 
-    realizarAgendamento() {
+    realizarAgendamento(admMain) {
         let dataValida = false;
         let dataConsulta;
         let medicoPrefer;
+        let adm = admMain;
 
         while(!dataValida){
 
@@ -81,11 +95,9 @@ export default class Cliente {
                 continue;
             }
 
-            
-            
             let agendamento = new Agendamento(this.getNome(), dataConsulta);
 
-            let listaM = getListaDeMedicos();
+            let listaM = adm.getListaDeMedicos();
             //consulta se o medico escolhido tem horario disponivel
             for(let i = 0; i < listaM.length; i++){
                 if(listaM[i].getNomeMedico() == medicoPrefer) {
@@ -93,7 +105,7 @@ export default class Cliente {
 
                         let ag = listaM[i].getAgendamentos()[k];
                         if(ag.getData().getTime() === dataConsulta.getTime()){
-                            console.log("Horário ocupado, ecolha outro por gentileza");
+                            console.log("Horário ocupado, escolha outro por gentileza");
                             return;
                         }
                     }
@@ -105,5 +117,10 @@ export default class Cliente {
             }
 
         }
+    }
+
+    comprar() {
+        let n = Number(read.question("Quantidade de itens"));
+        console.log(`Compra de ${n} itens realizada com sucesso!`)
     }
 }
