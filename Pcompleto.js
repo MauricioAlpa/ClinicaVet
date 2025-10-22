@@ -1,4 +1,4 @@
-import Plano from "./plano.js";
+import Plano from "./planos.js";
 export class Pcompleto extends Plano {
     
 

@@ -1,5 +1,4 @@
-import Cliente from "./cliente";
-var cli = new Cliente();
+import Cliente from "./cliente.js";
 export default class Plano {
     #valor
     #cobertura
@@ -39,7 +38,7 @@ export default class Plano {
 
 
     exibirDetalhes() {
-        console.log(`--- Plano: ${this.#cobertura} ---`);
+        console.log(`--- Plano: ${p_saude} ---`);
         console.log(`Valor: R$ ${this.#valor.toFixed(2)}`);
         console.log(`Inclui Banho: ${this.#banho ? 'Sim' : 'Não'}`);
         console.log(`Inclui Tosa: ${this.#tosa ? 'Sim' : 'Não'}`);
