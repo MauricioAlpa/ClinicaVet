@@ -60,7 +60,9 @@ export default class Adm {
         let especie = read.question("Qual a especie do cachorro:");
         let raca = read.question("Qual a raça do cachorro:");
         let pSaude = read.question("Qual o plano de saúde do animal(Básico/Completo):")
-
+        if (pSaude == "Básico" || pSaude == "básico") {
+            
+        }
         for (const clienteExistente of this.#listaDeClientes) {
             if (
                 clienteExistente.getCpf() === cpfC){
