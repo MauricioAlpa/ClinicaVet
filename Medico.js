@@ -40,5 +40,9 @@ export default class Medico {
         let diagnostico = read.question("Qual o diagnostico?\n")
         return console.log(`O doutor(a):${this.GetNome()} diagnosticou o animal ${getNome()} com ${diagnostico}`);
     }
+
+    tratamento() {
+        
+    }
 }
 
