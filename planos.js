@@ -1,12 +1,13 @@
 import Cliente from "./cliente";
+var cli = new Cliente();
 export default class Plano {
     #valor
     #cobertura
     #tosa
     #banho
-
+    
     constructor(valor, cobertura, tosa, banho) {
-        this.#valor = valor;
+        this.#valor = 5000;
         this.#cobertura = cobertura;
         this.#tosa = tosa;
         this.#banho = banho;
@@ -35,4 +36,50 @@ export default class Plano {
     setBanho(banho) {
         this.#banho = banho;
     }
+
+
+    exibirDetalhes() {
+        console.log(`--- Plano: ${this.#cobertura} ---`);
+        console.log(`Valor: R$ ${this.#valor.toFixed(2)}`);
+        console.log(`Inclui Banho: ${this.#banho ? 'Sim' : 'Não'}`);
+        console.log(`Inclui Tosa: ${this.#tosa ? 'Sim' : 'Não'}`);
+    }
+
+
+    calcularCustoAnual() {
+        return this.#valor * 12;
+    }
 }
+
+
+
+
+
+export class Pcompleto extends Plano {
+    
+
+    #bonus
+
+
+    constructor(valor) {
+
+        super(valor, 'Completo', true, true); 
+        this.#bonus = "1x Vacinação Anual Grátis"; 
+    }
+    exibirDetalhes() {
+        super.exibirDetalhes(); 
+        console.log(`Bônus: ${this.#bonus}`); 
+       
+    }
+
+    calcularCustoAnual() {
+        const custoBase = super.calcularCustoAnual();
+        const desconto = custoBase * 0.10;
+        return custoBase - desconto;
+    }
+}
+
+
+
+
+

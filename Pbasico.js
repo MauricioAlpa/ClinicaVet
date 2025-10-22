@@ -1,4 +1,11 @@
 import Plano from "./plano.js";
-export default class Pbasico extends Plano {
-    
+export class Pbasico extends Plano {
+
+    constructor(valor) {
+
+        super(valor, 'Básico', false, true); 
+    }
+    exibirDetalhes() {
+        super.exibirDetalhes();
+    }
 }
