@@ -4,6 +4,9 @@ import Adm from "./Adm.js";
 import Agendamento from './Agendamento.js'
 import Medico from './Medico.js'
 import Cliente from "./cliente.js"
+import Plano from "./planos.js";
+import { Pbasico } from "./Pbasico.js";
+import { Pcompleto } from "./Pcompleto.js";
 
 
 var adm = new Adm();

@@ -2,7 +2,9 @@ import read from "readline-sync";
 import Cliente from "./cliente.js"
 import Medico from "./Medico.js"
 import Consulta from "./Consulta.js"
-
+import Plano from "./planos.js";
+import { Pbasico } from "./Pbasico.js";
+import { Pcompleto } from "./Pcompleto.js";
 
 export default class Adm {
     #listaDeClientes 
@@ -55,13 +57,20 @@ export default class Adm {
     
     registrarCliente() {
         
+        
         let cpfC = read.question("Qual o CPF do cliente:");
-        let nomeC = read.question("Qual o nome do cachorro:");
-        let especie = read.question("Qual a especie do cachorro:");
-        let raca = read.question("Qual a raça do cachorro:");
+        let nomeC = read.question("Qual o nome do animal:");
+        let especie = read.question("Qual a especie do animal:");
+        let raca = read.question("Qual a raça:");
         let pSaude = read.question("Qual o plano de saúde do animal(Básico/Completo):")
         if (pSaude == "Básico" || pSaude == "básico") {
+            const Pbasico = new Pbasico();
+            pSaude = Pbasico;
             
+        } else if (pSaude == "Completo" || pSaude == "completo") {
+            const Pcompleto = new Pcompleto();
+            pSaude = Pcompleto;
+
         }
         for (const clienteExistente of this.#listaDeClientes) {
             if (
@@ -79,6 +88,12 @@ export default class Adm {
         console.log(
             `Cliente '${nomeC}' registrado com sucesso. Plano de saúde: ${pSaude}.`
         )
+        if (pSaude == ("Básico" || "básico")) {
+            console.log = Pbasico.exibirDetalhes();
+        }
+        else if (pSaude == ("Completo" || "completo")) {
+            console.log = Pcompleto.exibirDetalhes();
+        }
     }
 
     registrarMedico() {
