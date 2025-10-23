@@ -1,5 +1,4 @@
 import Agendamento from './Agendamento.js'
-import adm from "./AdmGlobal.js";
 import read from "readline-sync";
 
 export default class Cliente {
@@ -54,10 +53,11 @@ export default class Cliente {
         this.#pSaude = pSaude
     }
 
-    realizarAgendamento() {
+    realizarAgendamento(adm) {
         let dataValida = false;
         let dataConsulta;
         let medicoPrefer;
+        let admC = adm;
 
         while(!dataValida){
 
@@ -95,7 +95,7 @@ export default class Cliente {
 
             let agendamento = new Agendamento(this.getNome(), dataConsulta);
 
-            let listaM = adm.getListaDeMedicos();
+            let listaM = admC.getListaDeMedicos();
             //consulta se o medico escolhido tem horario disponivel
             for(let i = 0; i < listaM.length; i++){
                 if(listaM[i].getNomeMedico() == medicoPrefer) {

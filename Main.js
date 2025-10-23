@@ -1,7 +1,8 @@
 export default Main
 import read from "readline-sync";
-import adm from "./AdmGlobal.js";
+import Adm from "./Adm.js"
 
+const adm = new Adm()
 
 function Main() {
     console.log("Entrar como:\n(1)Administrador\n(2)Cliente");
