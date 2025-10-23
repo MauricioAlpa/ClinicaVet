@@ -1,15 +1,15 @@
-import Consulta from "./Consulta.js"
-import Cliente from "./cliente.js"
 import read from "readline-sync";
 
 
 export default class Medico {
     #nome_medico
-    #agendamentos = []
-    #historico_clientes = []
+    #agendamentos
+    #historico_clientes 
 
     constructor(nome) {
         this.#nome_medico = nome;
+        this.agendamentos = [];
+        this.#historico_clientes = []
     }
 
     getNomeMedico() {
@@ -38,11 +38,16 @@ export default class Medico {
 
     diagnosticar() {
         let diagnostico = read.question("Qual o diagnostico?\n")
-        return console.log(`O doutor(a):${this.GetNome()} diagnosticou o animal ${getNome()} com ${diagnostico}`);
+        return diagnostico;
     }
 
     tratamento() {
-        
+        let tratamento = read.question("Qual o tratamento?");
+        return tratamento;
+    }
+
+    consultar(cliente){
+
     }
 }
 

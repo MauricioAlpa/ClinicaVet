@@ -1,38 +1,44 @@
-import Cliente from "./cliente";
-var cli = new Cliente();
 export default class Plano {
     #valor
     #cobertura
     #tosa
     #banho
     
-    constructor(valor, cobertura, tosa, banho) {
-        this.#valor = 5000;
+    constructor(cobertura) {
         this.#cobertura = cobertura;
-        this.#tosa = tosa;
-        this.#banho = banho;
+        this.#valor = 450;
+        this.#tosa = true;
+        this.#banho = true;
     }
+
+    getCobertura() {
+        return this.#cobertura
+    }
+
     getValor() {
         return this.#valor;
     }
-    getCobertura() {
-        return this.#cobertura;
-    }
+
     getTosa() {
         return this.#tosa;
     }
+
     getBanho() {
         return this.#banho;
     }
+
+    setCobertura(cobertura){
+        this.#cobertura = cobertura;
+    }
+
     setValor(Valor) {
         this.#valor = Valor;
     }
-    setCobertura(cobertura) {
-        this.#cobertura = cobertura;
-    }
+
     setTosa(tosa) {
         this.#tosa = tosa;
     }
+
     setBanho(banho) {
         this.#banho = banho;
     }

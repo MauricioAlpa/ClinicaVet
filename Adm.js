@@ -1,7 +1,8 @@
 import read from "readline-sync";
 import Cliente from "./cliente.js"
 import Medico from "./Medico.js"
-import Consulta from "./Consulta.js"
+import Pbasico  from "./Pbasico.js";
+import Pcompleto from "./Pcompleto.js";
 
 
 export default class Adm {
@@ -19,7 +20,7 @@ export default class Adm {
 
     getNomeAdm(){
         return this.#nome;
-    }
+    }      
 
     getSenha() {
         return this.#senha;
@@ -54,14 +55,19 @@ export default class Adm {
     }
     
     registrarCliente() {
-        
+        let pS
+        //le as entradas do user
         let cpfC = read.question("Qual o CPF do cliente:");
         let nomeC = read.question("Qual o nome do cachorro:");
         let especie = read.question("Qual a especie do cachorro:");
         let raca = read.question("Qual a raça do cachorro:");
-        let pSaude = read.question("Qual o plano de saúde do animal(Básico/Completo):")
-        if (pSaude == "Básico" || pSaude == "básico") {
-            
+        let pSaude = read.question("Qual o plano de saúde do animal(Básico/Completo):").toLowerCase()
+
+        //verifica se o plano é básico ou completo
+        if (pSaude == "básico") {
+            pS = new Pbasico()
+        }else {
+            pS = new Pcompleto()
         }
         for (const clienteExistente of this.#listaDeClientes) {
             if (
@@ -71,7 +77,7 @@ export default class Adm {
             }
         }
 
-        const novoCliente = new Cliente(cpfC,nomeC, especie, raca, pSaude);
+        const novoCliente = new Cliente(cpfC,nomeC, especie, raca, pS);
 
 
         this.#listaDeClientes.push(novoCliente);

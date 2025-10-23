@@ -1,12 +1,10 @@
-import Cliente from "./cliente.js"
-
 export default class Agendamento {
     #nCliente
     #data 
 
     constructor(cliente, data) {
         this.#nCliente = cliente;
-        this.#data = data;
+        this.#data = data; 
     }
 
     getData() {
