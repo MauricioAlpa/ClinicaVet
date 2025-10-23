@@ -1,24 +1,25 @@
-import Plano from "./plano.js";
-export class Pcompleto extends Plano {
-    
-
+import Plano from "./planos.js";
+export default class Pcompleto extends Plano {
     #bonus
+    #limiteConsultas
 
+    constructor() {
 
-    constructor(valor) {
-
-        super(valor, 'Completo', true, true); 
-        this.#bonus = "1x Vacinação Anual Grátis"; 
+        super("Completo"); 
+        this.#bonus = "1x Vacinação Anual Grátis";
+        this.#limiteConsultas = 10 ;
     }
     exibirDetalhes() {
         super.exibirDetalhes(); 
         console.log(`Bônus: ${this.#bonus}`); 
-       
+        console.log(`Limite de consultas: ${this.#limiteConsultas}`);
     }
 
-    calcularCustoAnual() {
-        const custoBase = super.calcularCustoAnual();
-        const desconto = custoBase * 0.10;
-        return custoBase - desconto;
+    limiteConsulta() {
+       if(this.#limiteConsultas == 0){
+            console.log("Limite de consultas do mês atingido");
+       } else {
+            this.#limiteConsultas -= 1;
+       }
     }
 }

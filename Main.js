@@ -1,12 +1,7 @@
 export default Main
 import read from "readline-sync";
-import Adm from "./Adm.js";
-import Agendamento from './Agendamento.js'
-import Medico from './Medico.js'
-import Cliente from "./cliente.js"
+import adm from "./AdmGlobal.js";
 
-
-var adm = new Adm();
 
 function Main() {
     console.log("Entrar como:\n(1)Administrador\n(2)Cliente");
@@ -34,7 +29,8 @@ function Main() {
                     menuCliente(listaC[i]);
                     break;
                 }else {
-                    console.log("User não cadastrado.")
+                    console.log("User não cadastrado.");
+                    break;
                 }
             }
 
@@ -47,7 +43,7 @@ function menuAdm() {
     let op = 0;
     
     while(op != 4){
-        console.log("(1)Cadastrar cliente:\n(2)Cadastrar Medico\n(3)Voltar ao menu principal\n(4)Encerrar sessão")
+        console.log("(1)Cadastrar cliente\n(2)Cadastrar Medico\n(3)Voltar ao menu principal\n(4)Encerrar sessão")
         op = Number(read.question(""));
         console.clear();
         switch(op){
@@ -70,13 +66,13 @@ function menuCliente(cliente) {
     let op = 0;
     let clienteAtual = cliente;
 
-    while(op != 4){
-        console.log("(1)Agendar Consulta:\n(2)Comprar\n(3)Voltar ao menu principal\n(4)Encerrar sessão")
+    while(op != 5){
+        console.log("(1)Agendar Consulta\n(2)Comprar\n(3)Exibir detalhes do plano\n(4)Voltar ao menu principal\n(5)Encerrar sessão")
         op = Number(read.question(""));
         console.clear();
         switch(op){
             case 1: 
-                clienteAtual.realizarAgendamento(adm);
+                clienteAtual.realizarAgendamento();
                 break;
             
             case 2:
@@ -84,6 +80,11 @@ function menuCliente(cliente) {
                 break;
             
             case 3:
+                clienteAtual.getPsaude().exibirDetalhes();
+                console.clear();
+                break;
+            
+            case 4:
                 Main();
                 break;
         }

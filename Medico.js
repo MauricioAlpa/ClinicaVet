@@ -1,5 +1,3 @@
-import Consulta from "./Consulta.js"
-import Cliente from "./cliente.js"
 import read from "readline-sync";
 
 
@@ -46,6 +44,10 @@ export default class Medico {
     tratamento() {
         let tratamento = read.question("Qual o tratamento?");
         return tratamento;
+    }
+
+    consultar(cliente){
+
     }
 }
 
