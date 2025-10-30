@@ -1,10 +1,12 @@
 export default class Consulta {
+    #paciente
     #data
     #vet_responsavel
     #diagnostico
     #tratamento
 
-    constructor(data, vet_responsavel, diagnostico, tratamento) {
+    constructor(paciente,data, vet_responsavel, diagnostico, tratamento) {
+        this.#paciente = paciente;
         this.#data = new Date(data);
         this.#vet_responsavel = vet_responsavel;
         this.#diagnostico = diagnostico;
