@@ -13,7 +13,7 @@ export default class Adm {
 
     constructor(){
         this.#nome = "arthur"; 
-        this.#senha = 1234;
+        this.#senha = 1234567;
         this.#listaDeClientes = []
         this.#listaDeMedicos = []
     } 
